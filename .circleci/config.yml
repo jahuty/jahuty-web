@@ -1,0 +1,54 @@
+version: 2.1
+orbs:
+  codecov: codecov/codecov@1.1.3
+jobs:
+  build:
+    working_directory: ~/jahuty-web
+    docker:
+      - image: circleci/node:12.1.0
+    steps:
+      - checkout
+
+      - run:
+         name: update-npm
+         command: 'sudo npm ci npm@latest'
+
+      - restore_cache:
+          name: Restore NPM package cache
+          keys:
+            - npm-packages-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install dependencies
+          command: npm install --frozen-lockfile
+
+      - save_cache:
+          name: Save NPM package cache
+          key: npm-packages-{{ checksum "package-lock.json" }}
+          paths:
+            - ~/.cache/npm
+
+      - run:
+          name: Run static code analysis
+          command: npx eslint .
+
+      - run:
+          name: Run tests with coverage
+          # The --runInBand flag is recommended by CircleCI to reduce memory
+          # issues, it's recommended by Jest for easier debugging.
+          # See https://circleci.com/docs/2.0/collect-test-data/#jest for details.
+          command: npx jest --runInBand --coverage
+
+      # - store_artifacts:
+      #     path: test-results.xml
+      #     prefix: tests
+
+      - store_artifacts:
+          name: Uploading coverage report
+          path: coverage
+          prefix: coverage
+
+      # - store_test_results:
+      #    path: test-results.xml
+
+      - codecov/upload:
+          file: coverage/clover.xml
