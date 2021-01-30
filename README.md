@@ -12,14 +12,14 @@ This library requires a modern web browser.
 
 Add the following `<script>`s to your document to enable Jahuty (note, [Axios](https://github.com/axios/axios) must come first).
 
-```
+```html
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://unpkg.com/@jahuty/web@0.1.0/dist/web.js"></script>
 ```
 
 ## Usage
 
-Add a container for each snippet your document using the HTML5 [data-* attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*) `data-snippet-id`:
+Add a container for each snippet in your document using the HTML5 [data-* attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/data-*) `data-snippet-id`:
 
 ```html
 <div data-snippet-id="1"></div>
