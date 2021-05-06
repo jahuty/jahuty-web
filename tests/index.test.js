@@ -1,15 +1,8 @@
 import init from '../src/index';
 
-jest.mock('@jahuty/jahuty', () => (
-  jest.fn().mockImplementation(() => ({
-    snippets: {
-      render: () => ({ content: '<p>foo</p>' }),
-    },
-  }))
-));
-
 describe('init', () => {
   const content = '<p>foo</p>';
+  const options = { apiKey: 'foo' };
 
   describe('when zero containers exist', () => {
     beforeEach(() => {
@@ -17,12 +10,14 @@ describe('init', () => {
     });
 
     it('does not throw error', () => {
-      expect(() => init('foo')).not.toThrow(Error);
+      expect(() => init(options)).not.toThrow(Error);
     });
   });
 
   describe('when one container exists', () => {
     beforeEach(() => {
+      fetch.mockResponseOnce(JSON.stringify({ content }));
+
       document.body.innerHTML = '<div data-snippet-id="1"></div>';
     });
 
@@ -37,6 +32,8 @@ describe('init', () => {
 
   describe('when many containers exist', () => {
     beforeEach(() => {
+      fetch.mockResponse(JSON.stringify({ content }));
+
       document.body.innerHTML = '<div data-snippet-id="1"></div>'
         + '<div data-snippet-id="2"></div>'
         + '<div data-snippet-id="3"></div>';

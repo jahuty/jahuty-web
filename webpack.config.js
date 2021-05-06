@@ -1,11 +1,11 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: ['whatwg-fetch', './src/index.js'],
   target: 'node',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'web.js',
+    filename: 'jahuty.js',
     library: 'jahuty',
     libraryTarget: 'umd',
     libraryExport: 'default',
@@ -25,5 +25,4 @@ module.exports = {
       },
     ],
   },
-  externals: ['axios'],
 };
