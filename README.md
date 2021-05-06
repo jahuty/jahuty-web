@@ -20,7 +20,7 @@ Add a script to execute `jahuty()` after the resources and DOM have finished loa
 
 ```html
 <script>
-  window.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function () {
     jahuty({ apiKey: 'YOUR_API_KEY' });
   });
 </script>
@@ -50,7 +50,7 @@ You can render a snippet's _latest_ content, the content that currently exists i
 
 ```html
 <script>
-  window.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function () {
     jahuty({ apiKey: 'YOUR_API_KEY', preferLatest: true });
   });
 </script>
