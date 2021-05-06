@@ -1,20 +1,30 @@
-import Client from '@jahuty/jahuty';
-import SnippetContainer from './view/snippet-container';
-
+import 'whatwg-fetch';
 import 'regenerator-runtime/runtime';
 
-export default function init(apiKey) {
-  let renders = [];
+import JahutyConfig from './jahuty-config';
+import SnippetContainer from './snippet-container';
+import UrlFactory from './url-factory';
 
-  const client = new Client({ apiKey });
+export default function init(options) {
+  let renders = [];
 
   const containers = SnippetContainer.all();
 
   if (containers.length) {
+    const config = new JahutyConfig(options);
+
+    const urls = new UrlFactory(config);
+
     renders = containers.map(async (container) => {
-      const id = container.getSnippetId();
-      const render = await client.snippets.render(id);
-      container.setContent(render.content);
+      const url = urls.create(container);
+
+      const response = await fetch(url.href, { headers: config.headers });
+
+      const payload = await response.json();
+
+      if (response.ok) {
+        container.setContent(payload.content);
+      }
     });
   }
 

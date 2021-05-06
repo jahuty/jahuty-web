@@ -1,6 +1,6 @@
 {
   "name": "@jahuty/web",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Browser-based SDK for Jahuty's API",
   "author": [
     {
@@ -19,6 +19,7 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jest": "^24.1.3",
     "jest": "^24.8.0",
+    "jest-fetch-mock": "^3.0.3",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   },
@@ -29,7 +30,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@jahuty/jahuty": "^0.2.0",
-    "regenerator-runtime": "^0.13.7"
+    "regenerator-runtime": "^0.13.7",
+    "whatwg-fetch": "^3.6.2"
   }
 }

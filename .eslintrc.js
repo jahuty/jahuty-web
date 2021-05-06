@@ -15,6 +15,12 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    // This is to fix the ``'jest-fetch-mock' should be listed in the project's
+    // dependencies, not devDependencies error.
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
   },
   plugins: ['jest'],
+  globals: {
+    fetchMock: true,
+  },
 };
