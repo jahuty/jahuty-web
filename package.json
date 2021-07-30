@@ -1,6 +1,6 @@
 {
   "name": "@jahuty/web",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Browser-based SDK for Jahuty's API",
   "author": [
     {
