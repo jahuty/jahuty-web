@@ -28,6 +28,40 @@ describe('Container', () => {
     });
   });
 
+  describe('.getLocation()', () => {
+    describe('when location does not exist', () => {
+      const element = document.createElement('div');
+
+      const container = new SnippetContainer(element);
+
+      it('returns false', () => {
+        expect(container.getLocation()).toBeFalsy();
+      });
+    });
+
+    describe('when location is false', () => {
+      const element = document.createElement('div');
+      element.setAttribute('data-snippet-location', false);
+
+      const container = new SnippetContainer(element);
+
+      it('returns false', () => {
+        expect(container.getLocation()).toBeFalsy();
+      });
+    });
+
+    describe('when location is true', () => {
+      const element = document.createElement('div');
+      element.setAttribute('data-snippet-location', true);
+
+      const container = new SnippetContainer(element);
+
+      it('returns true', () => {
+        expect(container.getLocation()).toBe('http://localhost/');
+      });
+    });
+  });
+
   describe('.getParams()', () => {
     describe('when params do not exist', () => {
       const element = document.createElement('div');

@@ -32,6 +32,10 @@ export default class UrlFactory {
       query.append('latest', 1);
     }
 
+    if (container.getLocation()) {
+      query.append('location', container.getLocation());
+    }
+
     return query;
   }
 }

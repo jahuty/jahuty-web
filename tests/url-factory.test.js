@@ -11,6 +11,7 @@ describe('UrlFactory', () => {
           getSnippetId: () => 1,
           getParams: () => false,
           getPreferLatest: () => false,
+          getLocation: () => false,
         }));
       });
 
@@ -28,6 +29,7 @@ describe('UrlFactory', () => {
           getSnippetId: () => 1,
           getParams: () => ({ foo: 'foo' }),
           getPreferLatest: () => false,
+          getLocation: () => false,
         }));
       });
 
@@ -45,6 +47,7 @@ describe('UrlFactory', () => {
           getSnippetId: () => 1,
           getParams: () => false,
           getPreferLatest: () => true,
+          getLocation: () => false,
         }));
       });
 
@@ -63,6 +66,7 @@ describe('UrlFactory', () => {
         SnippetContainer.mockImplementation(() => ({
           getParams: () => false,
           getPreferLatest: () => false,
+          getLocation: () => false,
         }));
       });
 
@@ -80,6 +84,7 @@ describe('UrlFactory', () => {
         SnippetContainer.mockImplementation(() => ({
           getParams: () => ({ foo: 'bar' }),
           getPreferLatest: () => false,
+          getLocation: () => false,
         }));
       });
 
@@ -97,6 +102,7 @@ describe('UrlFactory', () => {
         SnippetContainer.mockImplementation(() => ({
           getParams: () => false,
           getPreferLatest: () => true,
+          getLocation: () => false,
         }));
       });
 
@@ -106,6 +112,24 @@ describe('UrlFactory', () => {
         const query = new UrlFactory({}).getQuery(container);
 
         expect(query.toString()).toEqual('latest=1');
+      });
+    });
+
+    describe('with location', () => {
+      beforeAll(() => {
+        SnippetContainer.mockImplementation(() => ({
+          getParams: () => false,
+          getPreferLatest: () => false,
+          getLocation: () => 'https://example.com',
+        }));
+      });
+
+      it('returns url-encoded string', () => {
+        const container = new SnippetContainer();
+
+        const query = new UrlFactory({}).getQuery(container);
+
+        expect(query.toString()).toEqual('location=https%3A%2F%2Fexample.com');
       });
     });
   });
