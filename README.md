@@ -13,7 +13,7 @@ This library supports the last two major versions of major browsers. See the [`.
 Add the following deferred `<script>` tag to your document:
 
 ```html
-<script defer src="https://unpkg.com/@jahuty/web@0.2.0/dist/jahuty.js"></script>
+<script defer src="https://unpkg.com/@jahuty/web@0.2.1/dist/jahuty.js"></script>
 ```
 
 Add a script to execute `jahuty()` after the resources and DOM have finished loading:
@@ -74,6 +74,14 @@ The parameters above would be equivalent to [assigning the variables](https://ww
 
 ```
 {% assign foo = "bar" %}
+```
+
+## Tracking renders
+
+You can record where snippets are rendered - the value of the `window.location.href` variable - using the `data-snippet-location` attribute:
+
+```html
+<div data-snippet-id="YOUR_SNIPPET_ID" data-snippet-location="true"></div>
 ```
 
 ## Caching for performance
