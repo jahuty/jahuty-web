@@ -7,7 +7,8 @@
  * @example  a container with params and latest content
  *   <div data-snippet-id="1"
  *        data-snippet-params='{"foo":"bar"}'
- *        data-snippet-latest="true"></div>
+ *        data-snippet-latest="true"
+ *        data-snippet-location="true"></div>
  */
 export default class SnippetContainer {
   constructor(element) {
@@ -29,6 +30,20 @@ export default class SnippetContainer {
     });
 
     return containers;
+  }
+
+  /**
+   * Returns the snippet's location (or undefined).
+   *
+   * @example  use the given value
+   *   <div data-snippet-id="1" data-snippet-location="true"></div>
+   *
+   * @return  String|undefined
+   */
+  getLocation() {
+    return this.element.dataset.snippetLocation
+      && this.element.dataset.snippetLocation.toLowerCase() === 'true'
+      && window.location.href;
   }
 
   /**
